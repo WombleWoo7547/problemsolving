@@ -1,39 +1,39 @@
-name: Generate Algorithms JSON
+name: Generate JSON
 
 on:
   push:
-    paths:
-      - 'algorithms/**'
-  pull_request:
-    paths:
-      - 'algorithms/**'
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
-  generate-json:
+  run-and-commit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      # Step 1: Checkout the repository
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: '18' # Adjust version as needed
 
-      - name: Install Dependencies
-        run: npm install
+      # Step 3: Install dependencies and run the JavaScript file
+      - name: Install Dependencies and Run Script
+        run: |
+          npm ci
+          node algorithms/gen-json.cjs # Replace with the name of your JS file
 
-      - name: Generate algorithms.json
-        run: node algorithms/gen-json.cjs
-
-      - name: Commit and Push changes
+      # Step 4: Commit and push changes
+      - name: Commit and Push Changes
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
           git add algorithms/algorithms.json
-          git commit -m "Update algorithms.json"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git commit -m "Update algorithms.json from GitHub Actions" || echo "No changes to commit"
+          git push https://x-access-token:${GH_TOKEN}@github.com/WombleWoo7547/problemsolving.git
