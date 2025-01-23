@@ -1,8 +1,8 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 // Path to the algorithms folder and output JSON file
-const algorithmsFolder = path.join(__dirname, "algorithms");
+const algorithmsFolder = path.join(__dirname);
 const outputFilePath = path.join(__dirname, "algorithms.json");
 
 // Read all `.py` files in the `algorithms` folder

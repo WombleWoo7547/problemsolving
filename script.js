@@ -17,22 +17,21 @@ function logToConsole(message) {
 
 // Dynamically Load Algorithms from the Folder
 async function loadAlgorithms() {
-  const response = await fetch("/algorithms"); // Fetch the directory listing
-  const files = await response.json(); // Assuming the server serves the file list
+  const response = await fetch("/algorithms.json"); // Fetch the JSON file
+  const files = await response.json();
   const dropdown = document.getElementById("algorithm");
   dropdown.innerHTML = ""; // Clear existing options
 
   files.forEach((file) => {
-    if (file.endsWith(".py")) {
-      const option = document.createElement("option");
-      option.value = file.replace(".py", ""); // Remove extension for readability
-      option.textContent = file.replace(".py", "");
-      dropdown.appendChild(option);
-    }
+    const option = document.createElement("option");
+    option.value = file.replace(".py", ""); // Remove extension for readability
+    option.textContent = file.replace(".py", "");
+    dropdown.appendChild(option);
   });
 
   updateSettings(); // Update settings for the first algorithm
 }
+
 
 // Update Settings Based on Selected Algorithm
 function updateSettings() {

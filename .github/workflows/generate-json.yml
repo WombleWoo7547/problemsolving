@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Generate algorithms.json
-        run: node algorithms/gen-json.js
+        run: node algorithms/gen-json.cjs
 
       - name: Commit and Push changes
         run: |
