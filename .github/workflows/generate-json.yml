@@ -24,7 +24,7 @@ jobs:
       # Step 3: Install dependencies and run the JavaScript file
       - name: Install Dependencies and Run Script
         run: |
-          npm ci
+          npm i
           node algorithms/gen-json.cjs # Replace with the name of your JS file
 
       # Step 4: Commit and push changes
