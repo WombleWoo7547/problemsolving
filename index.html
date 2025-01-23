@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms Runner</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <script defer src="/script.js"></script>
+</head>
+<body>
+    <h1>Algorithms Runner</h1>
+
+    <!-- Algorithm Selection -->
+    <div class="section">
+        <label for="algorithm">Select Algorithm:</label>
+        <select id="algorithm"></select>
+    </div>
+
+    <!-- Configurable Settings -->
+    <div class="section" id="settings"></div>
+
+    <!-- Run Button -->
+    <button onclick="runAlgorithm()">Run Algorithm</button>
+
+    <!-- Console -->
+    <h2>Console</h2>
+    <div id="console"></div>
+</body>
+</html>

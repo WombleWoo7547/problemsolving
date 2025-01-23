@@ -1,0 +1,38 @@
+name: Generate Algorithms JSON
+
+on:
+  push:
+    paths:
+      - 'algorithms/**'
+  pull_request:
+    paths:
+      - 'algorithms/**'
+
+jobs:
+  generate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Generate algorithms.json
+        run: node algorithms/gen-json.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add algorithms.json
+          git commit -m "Update algorithms.json"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
